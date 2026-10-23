@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "KALRO Cashew Nut",
-    "slug": "KALRO Cashew Nut",
+    "slug": "kalro-cashew-nut",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -20,6 +20,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
