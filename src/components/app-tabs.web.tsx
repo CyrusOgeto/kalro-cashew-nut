@@ -8,6 +8,7 @@ import {
 } from 'expo-router/ui';
 import { SymbolView } from 'expo-symbols';
 import { Pressable, useColorScheme, View, StyleSheet } from 'react-native';
+import { usePathname } from 'expo-router';
 
 import { ExternalLink } from './external-link';
 import { ThemedText } from './themed-text';
@@ -21,11 +22,18 @@ export default function AppTabs() {
       <TabSlot style={{ height: '100%' }} />
       <TabList asChild>
         <CustomTabList>
+          {/* Matched to your actual file names */}
           <TabTrigger name="home" href="/" asChild>
             <TabButton>Home</TabButton>
           </TabTrigger>
-          <TabTrigger name="explore" href="/explore" asChild>
-            <TabButton>Explore</TabButton>
+          <TabTrigger name="intro" href="/Intro" asChild>
+            <TabButton>Intro</TabButton>
+          </TabTrigger>
+          <TabTrigger name="details" href="/Details" asChild>
+            <TabButton>Details</TabButton>
+          </TabTrigger>
+          <TabTrigger name="about" href="/About" asChild>
+            <TabButton>About</TabButton>
           </TabTrigger>
         </CustomTabList>
       </TabList>
@@ -50,16 +58,19 @@ export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps
 export function CustomTabList(props: TabListProps) {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
+  const pathname = usePathname();
 
   return (
     <View {...props} style={styles.tabListContainer}>
       <ThemedView type="backgroundElement" style={styles.innerContainer}>
+        {/* Added your app name */}
         <ThemedText type="smallBold" style={styles.brandText}>
-          Expo Starter
+          KALRO Cashew Nut
         </ThemedText>
 
         {props.children}
 
+        {/* Kept the docs link but you can remove it if you want */}
         <ExternalLink href="https://docs.expo.dev" asChild>
           <Pressable style={styles.externalPressable}>
             <ThemedText type="link">Docs</ThemedText>
@@ -78,6 +89,7 @@ export function CustomTabList(props: TabListProps) {
 const styles = StyleSheet.create({
   tabListContainer: {
     position: 'absolute',
+    bottom: 0, // <--- THIS IS THE FIX: Pins it to the bottom of the screen
     width: '100%',
     padding: Spacing.three,
     justifyContent: 'center',
