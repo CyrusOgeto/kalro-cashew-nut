@@ -3,6 +3,10 @@ import { useColorScheme } from 'react-native';
 
 import { Colors } from '@/constants/theme';
 
+// Define the brown color for the active state
+const ACTIVE_BROWN = '#8B4513'; // Saddle Brown
+const INACTIVE_GRAY = '#888888'; // Gray for unselected tabs
+
 export default function AppTabs() {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
@@ -11,22 +15,52 @@ export default function AppTabs() {
     <NativeTabs
       backgroundColor={colors.background}
       indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
+      // This handles the ICON colors globally
+      iconColor={{
+        default: INACTIVE_GRAY,
+        selected: ACTIVE_BROWN,
+      }}
+    >
+      {/* 1. Home */}
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Label 
+          selectedStyle={{ color: ACTIVE_BROWN }}
+        >
+          Home
+        </NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon md="home" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+      {/* 2. Intro */}
+      <NativeTabs.Trigger name="Intro">
+        <NativeTabs.Trigger.Label 
+          selectedStyle={{ color: ACTIVE_BROWN }}
+        >
+          Intro
+        </NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon md="book" />
       </NativeTabs.Trigger>
+
+      {/* 3. Details */}
+      <NativeTabs.Trigger name="Details">
+        <NativeTabs.Trigger.Label 
+          selectedStyle={{ color: ACTIVE_BROWN }}
+        >
+          Details
+        </NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon md="list" />
+      </NativeTabs.Trigger>
+
+      {/* 4. About */}
+      <NativeTabs.Trigger name="About">
+        <NativeTabs.Trigger.Label 
+          selectedStyle={{ color: ACTIVE_BROWN }}
+        >
+          About
+        </NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon md="info" />
+      </NativeTabs.Trigger>
+
     </NativeTabs>
   );
 }
